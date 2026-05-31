@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_port_discharge_tree" model="ir.ui.view">
+        <field name="name">port.discharge.tree</field>
+        <field name="model">port.discharge</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="pd_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_port_discharge_form" model="ir.ui.view">
+        <field name="name">port.discharge.form</field>
+        <field name="model">port.discharge</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="pd_name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_port_discharge_tree" model="ir.ui.view">
+        <field name="name">port.discharge.tree</field>
+        <field name="model">port.discharge</field>
+        <field name="arch" type="xml">
+            <tree string="Port Discharge">
+                <field name="pd_name"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Action -->
+    <record id="action_port_discharge" model="ir.actions.act_window">
+        <field name="name">Port of Discharge</field>
+        <field name="res_model">port.discharge</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+
+    <menuitem id="menu_port_discharge"
+              name="Port of Discharge"
+              parent="project.menu_project_management"
+              action="action_port_discharge"/>
+</odoo>

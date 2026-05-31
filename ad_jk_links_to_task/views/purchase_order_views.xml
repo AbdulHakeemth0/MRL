@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.form.view.inherit.ad.jk.links.to.task</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="//field[@name='currency_id']" position="after">-->
+<!--                <field name="project_id"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//sheet//group" position="inside">-->
+<!--            -->
+<!--        </xpath>-->
+            <field name="partner_id" position="after">
+                <field name="doc_created" invisible="1"/>
+            </field>
+<!--            <xpath expr="//header" position="inside">-->
+<!--                <button name="action_create_document" type="object" string="Create SO"-->
+<!--                        invisible="doc_created != False"/>-->
+<!--            </xpath>-->
+            <xpath expr="//header" position="inside">
+                <button name="action_create_sale_order"
+                        string="Create SO"
+                        type="object"
+                        class="btn-primary"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="partner_bank_id"/>
+                <field name="company_partner_id" invisible="1"/>
+                <field name="company_bank_id"/>
+                <field name="agent_id"/>
+                <field name="reference_number"/>
+            </xpath>
+            <xpath expr="//field[@name='date_order']" position="after">
+<!--                <field name="payment_mode"/>-->
+                <field name="yard"/>
+                <field name="delivery_term"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="number_of_containers"/>
+                <field name="container_size"/>
+                <field name="packing_details"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">
+                <field name="attachment_details"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="purchase_order_tree_hide_create" model="ir.ui.view">
+        <field name="name">purchase.order.tree.hide.create</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">True</attribute>
+            </xpath>
+<!--            <xpath expr="//tree" position="inside">-->
+<!--                <button name="action_view_po_form"-->
+<!--                        string="View"-->
+<!--                        type="object"-->
+<!--                        icon="fa-eye"-->
+<!--                        class="btn-primary"/>-->
+<!--            </xpath>-->
+
+<!--            <xpath expr="//tree" position="inside">-->
+<!--                <header>-->
+<!--                    <button name="action_open_project_from_po"-->
+<!--                            type="object"-->
+<!--                            string="Add"-->
+<!--                            icon="fa-project-diagram"-->
+<!--                            class="btn-primary"/>-->
+<!--&lt;!&ndash;                <button name="action_open_po_for_project"&ndash;&gt;-->
+<!--&lt;!&ndash;                        type="object"&ndash;&gt;-->
+<!--&lt;!&ndash;                        string="Add"&ndash;&gt;-->
+<!--&lt;!&ndash;                        class="btn-primary"/>&ndash;&gt;-->
+<!--                </header>-->
+<!--            </xpath>-->
+
+
+        </field>
+    </record>
+</odoo>

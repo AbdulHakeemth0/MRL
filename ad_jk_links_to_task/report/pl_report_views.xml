@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_packing_list">
+        <t t-call="ad_jk_links_to_task.packing_list_jk_template">
+            <main>
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page" style="font-size:12px; font-family: Helvetica, sans-serif; line-height: 1.5;">
+<!--                        <div class="text-center" style="margin-bottom:25px;">-->
+<!--                            <h2 style="margin:0; font-size:20px; font-weight:700; letter-spacing:1px;-->
+<!--                                text-transform:uppercase; color:#2F4F4F; display:inline-block;-->
+<!--                                position:relative; padding-bottom:6px; white-space:nowrap; ">-->
+<!--                                PACKING LIST-->
+<!--                                <span style="position:absolute; left:0; bottom:0; width:100%; height:2px; background-color:#444; "/>-->
+<!--                            </h2>-->
+<!--                        </div>-->
+
+                        <div class="row">
+                            <div class="col-6" style="padding-right: 15px;">
+                                <div style="font-weight: bold;">
+                                    Shipper:
+                                </div>
+                                <hr style="border: none; border-top: 1.9px solid #555; margin: 8px 0;"/>
+                                <div>
+                                    <strong t-esc="doc.company_id.name"/>
+                                    <br/>
+
+                                    <t t-if="doc.company_id.street">
+                                        <t t-esc="doc.company_id.street"/><br/>
+                                    </t>
+                                    <t t-if="doc.company_id.street2">
+                                        <t t-esc="doc.company_id.street2"/><br/>
+                                    </t>
+                                    <t t-if="doc.company_id.city">
+                                        <t t-esc="doc.company_id.city"/>,
+                                    </t>
+                                    <t t-if="doc.company_id.state_id.name">
+                                        <t t-esc="doc.company_id.state_id.name"/>,
+                                    </t>
+                                    <t t-if="doc.company_id.country_id.name">
+                                        <t t-esc="doc.company_id.country_id.name"/><br/>
+                                    </t>
+
+                                    <t t-if="doc.company_id.phone">
+                                        Tel: <t t-esc="doc.company_id.phone"/><br/>
+                                    </t>
+                                    <t t-if="doc.company_id.email">
+                                        Email: <t t-esc="doc.company_id.email"/><br/>
+                                    </t>
+                                    <t t-if="doc.company_id.website">
+                                        Website: <t t-esc="doc.company_id.website"/><br/>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="col-6" style="padding-left: 15px;">
+                                <div style="font-weight: bold;">
+                                    Consignee / Notify:
+                                </div>
+                                <hr style="border: none; border-top: 1.9px solid #555; margin: 8px 0;"/>
+                                <div>
+                                    <strong><t t-esc="doc.partner_id.name"/></strong>
+                                    <br/>
+                                    <t t-esc="doc.partner_id.street"/>
+                                    <t t-if="doc.partner_id.street2">
+                                        <br/>
+                                        <t t-esc="doc.partner_id.street2"/> |
+                                    </t>
+                                    <t t-if="doc.partner_id.zip">
+                                        PIN CODE: <t t-esc="doc.partner_id.zip"/>
+                                    </t>
+                                    <br/>
+                                    <t t-if="doc.partner_id.state_id">
+                                        STATE: <t t-esc="doc.partner_id.state_id.name"/> |
+                                    </t>
+                                    <t t-if="doc.partner_id.country_id">
+                                        COUNTRY: <t t-esc="doc.partner_id.country_id.name"/>
+                                    </t>
+                                    <br/>
+                                    <t t-if="doc.partner_id.vat">
+                                        GSTIN: <t t-esc="doc.partner_id.vat"/> |
+                                    </t>
+                                    <t t-if="doc.partner_id.pan_no">
+                                        PAN NO: <t t-esc="doc.partner_id.pan_no"/>
+                                    </t>
+                                    <br/>
+                                    <t t-if="doc.partner_id.iec_code">
+                                        IEC Code: <t t-esc="doc.partner_id.iec_code"/> |
+                                    </t>
+                                    <t t-if="doc.partner_id.contact_person_id">
+                                        Contact: <t t-esc="doc.partner_id.contact_person_id.name"/> |
+                                    </t>
+                                    PHONE: <t t-esc="doc.partner_id.phone"/>
+                                    <br/>
+                                    EMAIL: <t t-esc="doc.partner_id.email"/>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <table class="table table-borderless" style="width:100%; margin-top: 10px;">
+                            <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                <td style="padding: 5px; border: none; background-color: #f2f9fc;">
+                                    <strong>Invoice No.</strong>
+                                </td>
+                                <td style="padding: 5px; border: none;">
+                                    <p t-field="doc.invoice_no"/>
+                                </td>
+                                <td style="padding: 5px; border: none; background-color: #f2f9fc;">
+                                    <strong>Invoice Date</strong>
+                                </td>
+                                <td style="padding: 5px; border: none;">
+                                    <p t-esc="doc.invoice_date"/>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                <td style="padding: 5px; border: none; background-color: #f2f9fc;">
+                                    <strong>Contract No.</strong>
+                                </td>
+                                <td style="padding: 5px; border: none;">
+                                        <p><t t-esc="doc.contract_no"/></p>
+                                </td>
+                                <td style="padding: 5px; border: none; background-color: #f2f9fc;">
+                                    <strong>Contract Date</strong>
+                                </td>
+                                <td style="padding: 5px; border: none;">
+                                    <p><span t-esc="doc.contract_date.strftime('%d/%m/%Y')"/></p>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div style="margin-top: 25px;">
+                            <div>
+                                <h6>
+                                    <strong>Shipment &amp; Logistics</strong>
+                                </h6>
+                            </div>
+                            <table class="table table-borderless" style="width: 100%;">
+                                <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                    <td style="padding: 8px 5px; border: none; width: 25%; background-color: #f2f9fc;">
+                                        <strong>Bill of Loading No.</strong>
+                                    </td>
+                                    <td style="padding: 8px 5px; border: none; width: 25%;">
+                                        <t t-esc="doc.bill_of_loading_no"/>
+                                    </td>
+                                    <td style="padding: 8px 5px; border: none; width: 25%; background-color: #f2f9fc;">
+                                        <strong>Vessel Name</strong>
+                                    </td>
+                                    <td style="padding: 8px 5px; border: none; width: 25%;">
+                                        <t t-esc="doc.vessel_name"/>
+                                    </td>
+                                </tr>
+
+                                <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                    <td style="padding: 8px 5px; border: none; background-color: #f2f9fc;">
+                                        <strong>Voyage No.</strong>
+                                    </td>
+                                    <td style="padding: 8px 5px; border: none;">
+                                        <t t-esc="doc.voyage_no"/>
+                                    </td>
+                                    <td style="padding: 8px 5px; border: none; background-color: #f2f9fc;">
+                                        <strong>Shipped on Board Date</strong>
+                                    </td>
+                                    <td style="padding: 8px 5px; border: none;">
+                                        <t t-esc="doc.shipped_on_board"/>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                    <td style="padding: 8px 5px; border: none; background-color: #f2f9fc;">
+                                        <strong>Port of Loading</strong>
+                                    </td>
+                                    <td style="padding: 8px 5px; border: none;">
+                                        <t t-esc="doc.port_of_loading"/>
+                                    </td>
+                                    <td style="padding: 8px 5px; border: none; background-color: #f2f9fc;">
+                                        <strong>Port of Discharge</strong>
+                                    </td>
+                                    <td style="padding: 8px 5px; border: none;">
+                                        <t t-esc="doc.discharge_of_port"/>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                    <td style="padding: 8px 5px; border: none; background-color: #f2f9fc;">
+                                        <strong>Final Destination</strong>
+                                    </td>
+                                    <td style="padding: 8px 5px; border: none;">
+                                        <t t-esc="doc.final_destination"/>
+                                    </td>
+                                    <td style="padding: 8px 5px; border: none; background-color: #f2f9fc;">
+                                        <strong>Packing</strong>
+                                    </td>
+                                    <td style="padding: 8px 5px; border: none;">
+                                        <t t-esc="doc.packing_type"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <table class="table table-borderless" style="width:100%; margin-top: 10px;">
+                            <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                            <thead style="background-color: #f2f9fc;">
+                                <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                    <th class="text-center" style="border: none;">
+                                        <b>SI NO</b>
+                                    </th>
+                                    <th style="border: none;" class="text-start">Material Description</th>
+                                    <th style="border: none;" class="text-start">HSN Code</th>
+                                    <th style="border: none;" class="text-start">Container NO.</th>
+                                    <th style="border: none;" class="text-start">Seal No.</th>
+                                    <th style="border: none;" class="text-start">Gross Wt.(MT)</th>
+                                    <th style="border: none;" class="text-start">Tare Wt.(MT)</th>
+                                    <th style="border: none;" class="text-start">Net Wt.(MT)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="">
+                                <t t-set="i" t-value="0"/>
+                                <t t-foreach="doc.material_ids" t-as="line">
+                                    <t t-set="i" t-value="i + 1"/>
+                                    <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                            <td style="border: none;">
+                                                <t t-esc="i"/>
+                                            </td>
+                                        <td style="border: none;" name="td_name">
+                                            <span t-field="line.product_id.display_name"/>
+                                        </td>
+
+
+                                        <td style="border: none; text-align: center;">
+                                            <span t-field="line.hsn_code"/>
+                                        </td>
+                                            <td style="border: none;text-align: center;">
+                                                <span t-field="line.container_no"/>
+                                            </td>
+                                            <td style="border: none; text-align: center;">
+                                                <span t-field="line.seal_no"/>
+                                            </td>
+                                            <td style="border: none; text-align: center;">
+                                                <t t-esc="round(line.gross_weight,3)"/>
+                                            </td>
+                                            <td style="border: none;text-align: center;">
+                                                <t t-esc="round(line.tare_weight,3)"/>
+                                            </td>
+                                            <td style="border: none;text-align: center;">
+                                               <t t-esc="round(line.net_weight,3)"/>
+                                            </td>
+                                    </tr>
+                                </t>
+                                <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                    <td style="border: none; font-weight:bold">
+                                        TOTAL
+                                    </td>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td style="border: none; font-weight:bold, text-align: center;">
+                                        <t t-esc="'%.3f' % sum(doc.material_ids.mapped('gross_weight'))"/>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <t t-esc="'%.3f' % sum(doc.material_ids.mapped('tare_weight'))"/>
+                                    </td>
+                                    <td class="o_price_total" style="border: none; font-weight:bold; text-align: center;">
+                                        <t t-esc="'%.3f' % sum(doc.material_ids.mapped('net_weight'))"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="row" style="margin-top: -60px;">
+                            <div class="col-6"/>
+                            <div class="col-6" style="padding-right: 15px;">
+                                <table class="table table-borderless" style="width: 80%;">
+                                    <tr style="border-top: 1px solid black;">
+                                        <div class="row mt-4">
+                                            <div class="col-12" style="text-align: center;">
+<!--                                                <img t-if="doc.company_id"-->
+<!--                                                     t-att-src="image_data_uri(doc.company_id.signature)"-->
+<!--                                                     style="max-height: 180px;text-align: center; margin-top: -120px;" alt="Logo"/>-->
+                                                <t t-if="doc.company_id.show_signature_stamp_1 and doc.company_id.signature_stamp_1">
+                                                    <img t-att-src="image_data_uri(doc.company_id.signature_stamp_1)"
+                                                         style="max-height: 180px; display: block; margin: 0 auto;"
+                                                         alt="Signature Stamp LLC"/>
+                                                    <p style="margin-top: 10px; font-weight: bold;"></p>
+                                                </t>
+                                                <t t-elif="doc.company_id.show_signature_stamp_2 and doc.company_id.signature_stamp_2">
+                                                    <img t-att-src="image_data_uri(doc.company_id.signature_stamp_2)"
+                                                         style="max-height: 160px; display: block; margin: 0 auto;"
+                                                         alt="Signature Stamp FZC"/>
+                                                    <p style="margin-top: 10px; font-weight: bold;"></p>
+                                                </t>
+
+                                            </div>
+                                        </div>
+                                        <td style="padding: 5px 5px 0 5px; border: none; text-align: center;">
+                                            <div style="font-weight: bold; font-size: 1em; color: #000;">
+                                                FOR, <span t-esc="doc.company_id.partner_id.name"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 1px 5px 5px 5px; text-align: center; border: none; ">
+                                            <div style="font-size: 0.9em; color: #000; font-style: italic;">
+                                                Authorised Signature
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </main>
+        </t>
+    </template>
+    <record id="packing_list_report_action" model="ir.actions.report">
+        <field name="name">Packing List</field>
+        <field name="model">packing.list</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ad_jk_links_to_task.report_packing_list</field>
+        <field name="report_file">ad_jk_links_to_task.report_packing_list</field>
+       <field name="print_report_name">
+    "%s%s-PL" % (
+        object.shipped_on_board.strftime('') if object.shipped_on_board else '',
+        object.number or ''
+    )
+</field>
+<!--        <field name="print_report_name">'Packing List-ACCURATE'</field>-->
+    </record>
+</odoo>

@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="freight_certificate_jk_template">
+        <div t-attf-class="header oo_company_#{doc.company_id.id}_layout" t-att-style="report_header_style">
+            <div class="row">
+                <div class="col-6">
+                    <img t-if="doc.company_id"
+                         t-att-src="image_data_uri(doc.company_id.logo)"
+                         style="max-height: 110px;" alt="Logo"/>
+                </div>
+                <div class="col-6" style="text-align: right; display: flex; justify-content: flex-end;">
+                    <h4 class="first-page" style="font-weight:bold; margin: 0;
+                        padding-top:40px;
+                        font-weight: bold;
+                        font-family: Helvetica, sans-serif;
+                        color: #1f2f45;
+                        45aqedisplay: inline-block;">
+                        FREIGHT CERTIFICATE
+                    </h4>
+                </div>
+            </div>
+            <!--            <div style="border-bottom:  1.9px solid #dee2e6; margin-top: 8px; margin-bottom: 8px;"></div>-->
+        </div>
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{doc.company_id.id}_layout {{  'o_report_layout_background' if doc.company_id.layout_background in ['Geometric', 'Custom']  else  '' }}"
+             t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % doc.company_id.layout_background_image.decode('utf-8') if doc.company_id.layout_background_image and doc.company_id.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if doc.company_id.layout_background == 'Geometric' else ''}});"
+             t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-out="0"/>
+        </div>
+        <div t-attf-class="footer o_standard_footer o_company_#{doc.company_id.id}_layout">
+            <div style="border-top: 2px solid #D3D3D3; padding-top: 5px; font-size: 10px; color: #666;">
+                 <div>
+
+                    <!-- LEFT SIDE (Company Name + Title) -->
+                    <div class="col-7" style="float: left; text-align: left; font-weight: 900;">
+
+                        <!-- Company Name Based on ID -->
+<!--                        <t t-if="doc.company_id.name == 'MRL Trading L.L.C'">-->
+<!--                            <p class="text-muted" style="font-size: 38px; color: #444; letter-spacing: 1px;">-->
+<!--                                M R L TRADING L.L.C-->
+<!--                            </p>-->
+<!--                        </t>-->
+
+<!--                        <t t-if="doc.company_id.name == 'MRL TRADING FZC'">-->
+<!--                            <p class="text-muted" style="font-size: 38px; color: #444; letter-spacing: 1px;">-->
+<!--                                M R L TRADING FZC-->
+<!--                            </p>-->
+<!--                        </t>-->
+
+                        <div style="font-size: 18px;">
+                            <strong t-esc="doc.company_id.name"/>
+                        </div>
+
+                        <p style="font-size: 13px; border-top: 1px solid black;border-bottom: 1px solid black;letter-spacing: 1px;">
+                            DEALERS IN FERROUS - NON-FERROUS METALS
+                        </p>
+                    </div>
+
+                    <!-- RIGHT SIDE (Address Based on Company ID) -->
+                    <div class="text-muted col-5" style="float: right; text-align: right;">
+
+                        <!-- Address for MRL Trading LLC (company_id = 1) -->
+                        <t t-if="doc.company_id.name == 'MRL Trading L.L.C'">
+                            <span style="font-size:10px; font-weight:bold;white-space:nowrap;">
+                                PO BOX : 185557, Dubai - United Arab Emirates, Tel : +971-42240332
+                            </span>
+                        </t>
+
+                        <!-- Address for MRL Trading FZC (company_id = 2) -->
+                        <t t-if="doc.company_id.name == 'MRL TRADING FZC'">
+                            <span style="font-size:8px;display: inline-block; font-weight:bold;white-space: nowrap;">
+                                PO BOX : 185557, Hamriyah Free Zone, Sharjah - United Arab Emirates, Tel : +971-42240332
+                            </span>
+                        </t>
+
+                        <div style="font-size:10px; font-weight:bold; margin-top: 5px;white-space: nowrap;">
+                            E-mail : mails@mrltrading.net | Website :
+                            <a href="http://www.mrltrading.net" style="color:#666; text-decoration: none;">www.mrltrading.net</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="clear: both;"></div>
+            </div>
+
+            <!-- Page Numbering -->
+            <div class="text-center text-muted" style="font-size: 10px; padding-top: 5px;">
+                <span t-if="report_type == 'pdf'">Page:
+                    <span class="page"/>
+                    /
+                    <span class="topage"/>
+                </span>
+            </div>
+        </div>
+    </template>
+
+    <template id="packing_list_jk_template">
+        <div t-attf-class="header oo_company_#{doc.company_id.id}_layout" t-att-style="report_header_style">
+            <div class="row">
+                <div class="col-6">
+                    <img t-if="doc.company_id"
+                         t-att-src="image_data_uri(doc.company_id.logo)"
+                         style="max-height: 110px;" alt="Logo"/>
+                </div>
+                <div class="col-6" style="text-align: right; display: flex; justify-content: flex-end;">
+                    <h4 class="first-page" style="font-weight:bold; margin: 0;
+                        padding-top:40px;
+                        font-weight: bold;
+                        font-family: Helvetica, sans-serif;
+                        color: #1f2f45;
+                        45aqedisplay: inline-block;">
+                        PACKING LIST
+                    </h4>
+                </div>
+            </div>
+            <!--            <div style="border-bottom:  1.9px solid #dee2e6; margin-top: 8px; margin-bottom: 8px;"></div>-->
+        </div>
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{doc.company_id.id}_layout {{  'o_report_layout_background' if doc.company_id.layout_background in ['Geometric', 'Custom']  else  '' }}"
+             t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % doc.company_id.layout_background_image.decode('utf-8') if doc.company_id.layout_background_image and doc.company_id.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if doc.company_id.layout_background == 'Geometric' else ''}});"
+             t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-out="0"/>
+        </div>
+        <div t-attf-class="footer o_standard_footer o_company_#{doc.company_id.id}_layout">
+            <div style="border-top: 2px solid #D3D3D3; padding-top: 5px; font-size: 10px; color: #666;">
+                <div>
+
+                    <!-- LEFT SIDE (Company Name + Title) -->
+                    <div class="col-7" style="float: left; text-align: left; font-weight: 900;">
+
+                        <!-- Company Name Based on ID -->
+<!--                        <t t-if="doc.company_id.name == 'MRL Trading L.L.C'">-->
+<!--                            <p class="text-muted" style="font-size: 38px; color: #444; letter-spacing: 1px;">-->
+<!--                                M R L TRADING L.L.C-->
+<!--                            </p>-->
+<!--                        </t>-->
+
+<!--                        <t t-if="doc.company_id.name == 'MRL TRADING FZC'">-->
+<!--                            <p class="text-muted" style="font-size: 38px; color: #444; letter-spacing: 1px;">-->
+<!--                                M R L TRADING FZC-->
+<!--                            </p>-->
+<!--                        </t>-->
+
+                        <div style="font-size: 18px;">
+                            <strong t-esc="doc.company_id.name"/>
+                        </div>
+
+                        <p style="font-size: 13px; border-top: 1px solid black;border-bottom: 1px solid black;letter-spacing: 1px;">
+                            DEALERS IN FERROUS - NON-FERROUS METALS
+                        </p>
+                    </div>
+
+                    <!-- RIGHT SIDE (Address Based on Company ID) -->
+                    <div class="text-muted col-5" style="float: right; text-align: right;">
+
+                        <!-- Address for MRL Trading LLC (company_id = 1) -->
+                        <t t-if="doc.company_id.name == 'MRL Trading L.L.C'">
+                            <span style="font-size:8px;display: inline-block; font-weight:bold;white-space: nowrap;">
+                                PO BOX : 185557, Dubai - United Arab Emirates, Tel : +971-42240332
+                            </span>
+                        </t>
+
+                        <!-- Address for MRL Trading FZC (company_id = 2) -->
+                        <t t-if="doc.company_id.name == 'MRL TRADING FZC'">
+                            <span style="font-size:10px; font-weight:bold;white-space: nowrap;">
+                                PO BOX : 185557, Hamriyah Free Zone, Sharjah - United Arab Emirates, Tel : +971-42240332
+                            </span>
+                        </t>
+
+                        <div style="font-size:10px; font-weight:bold; margin-top: 5px;white-space: nowrap;">
+                            E-mail : mails@mrltrading.net | Website :
+                            <a href="http://www.mrltrading.net" style="color:#666; text-decoration: none;">www.mrltrading.net</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="clear: both;"></div>
+            </div>
+
+            <!-- Page Numbering -->
+            <div class="text-center text-muted" style="font-size: 10px; padding-top: 5px;">
+                <span t-if="report_type == 'pdf'">Page:
+                    <span class="page"/>
+                    /
+                    <span class="topage"/>
+                </span>
+            </div>
+        </div>
+    </template>
+
+
+
+
+    <template id="certificate_origin_jk_template">
+        <div t-attf-class="header oo_company_#{doc.company_id.id}_layout" t-att-style="report_header_style">
+            <div class="row">
+                <div class="col-6">
+                    <img t-if="doc.company_id"
+                         t-att-src="image_data_uri(doc.company_id.logo)"
+                         style="max-height: 110px;" alt="Logo"/>
+                </div>
+                <div class="col-6" style="text-align: right; display: flex; justify-content: flex-end;">
+                    <h4 class="first-page" style="font-weight:bold; margin: 0;
+                        padding-top:40px;
+                        font-weight: bold;
+                        font-family: Helvetica, sans-serif;
+                        color: #1f2f45;
+                        45aqedisplay: inline-block;">
+                        CERTIFICATE OF ORIGIN
+                    </h4>
+                </div>
+            </div>
+            <!--            <div style="border-bottom:  1.9px solid #dee2e6; margin-top: 8px; margin-bottom: 8px;"></div>-->
+        </div>
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{doc.company_id.id}_layout {{  'o_report_layout_background' if doc.company_id.layout_background in ['Geometric', 'Custom']  else  '' }}"
+             t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % doc.company_id.layout_background_image.decode('utf-8') if doc.company_id.layout_background_image and doc.company_id.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if doc.company_id.layout_background == 'Geometric' else ''}});"
+             t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-out="0"/>
+        </div>
+        <div t-attf-class="footer o_standard_footer o_company_#{doc.company_id.id}_layout">
+            <div style="border-top: 2px solid #D3D3D3; padding-top: 5px; font-size: 10px; color: #666;">
+                 <div>
+
+                    <!-- LEFT SIDE (Company Name + Title) -->
+                    <div class="col-7" style="float: left; text-align: left; font-weight: 900;">
+
+                        <!-- Company Name Based on ID -->
+<!--                        <t t-if="doc.company_id.name == 'MRL Trading L.L.C'">-->
+<!--                            <p class="text-muted" style="font-size: 38px; color: #444; letter-spacing: 1px;">-->
+<!--                                M R L TRADING L.L.C-->
+<!--                            </p>-->
+<!--                        </t>-->
+
+<!--                        <t t-if="doc.company_id.name == 'MRL TRADING FZC'">-->
+<!--                            <p class="text-muted" style="font-size: 38px; color: #444; letter-spacing: 1px;">-->
+<!--                                M R L TRADING FZC-->
+<!--                            </p>-->
+<!--                        </t>-->
+
+                        <div style="font-size: 18px;">
+                            <strong t-esc="doc.company_id.name"/>
+                        </div>
+
+                        <p style="font-size: 13px; border-top: 1px solid black;border-bottom: 1px solid black;letter-spacing: 1px;">
+                            DEALERS IN FERROUS - NON-FERROUS METALS
+                        </p>
+                    </div>
+
+                    <!-- RIGHT SIDE (Address Based on Company ID) -->
+                    <div class="text-muted col-5" style="float: right; text-align: right;">
+
+                        <!-- Address for MRL Trading LLC (company_id = 1) -->
+                        <t t-if="doc.company_id.name == 'MRL Trading L.L.C'">
+                            <span style="font-size:10px; font-weight:bold;white-space:nowrap;">
+                                PO BOX : 185557, Dubai - United Arab Emirates, Tel : +971-42240332
+                            </span>
+                        </t>
+
+                        <!-- Address for MRL Trading FZC (company_id = 2) -->
+                        <t t-if="doc.company_id.name == 'MRL TRADING FZC'">
+                            <span style="font-size:8px;display: inline-block; font-weight:bold;white-space: nowrap;">
+                                PO BOX : 185557, Hamriyah Free Zone, Sharjah - United Arab Emirates, Tel : +971-42240332
+                            </span>
+                        </t>
+
+                        <div style="font-size:10px; font-weight:bold; margin-top: 5px;white-space: nowrap;">
+                            E-mail : mails@mrltrading.net | Website :
+                            <a href="http://www.mrltrading.net" style="color:#666; text-decoration: none;">www.mrltrading.net</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="clear: both;"></div>
+            </div>
+
+            <!-- Page Numbering -->
+            <div class="text-center text-muted" style="font-size: 10px; padding-top: 5px;">
+                <span t-if="report_type == 'pdf'">Page:
+                    <span class="page"/>
+                    /
+                    <span class="topage"/>
+                </span>
+            </div>
+        </div>
+    </template>
+    <template id="certificate_analysis_jk_template">
+        <div t-attf-class="header oo_company_#{doc.company_id.id}_layout" t-att-style="report_header_style">
+            <div class="row">
+                <div class="col-6">
+                    <img t-if="doc.company_id"
+                         t-att-src="image_data_uri(doc.company_id.logo)"
+                         style="max-height: 110px;" alt="Logo"/>
+                </div>
+                <div class="col-6" style="text-align: right; display: flex; justify-content: flex-end;">
+                    <h4 class="first-page" style="font-weight:bold; margin: 0;
+                        padding-top:40px;
+                        font-weight: bold;
+                        font-family: Helvetica, sans-serif;
+                        color: #1f2f45;
+                        45aqedisplay: inline-block;">
+                        CERTIFICATE OF ANALYSIS
+                    </h4>
+                </div>
+            </div>
+            <!--            <div style="border-bottom:  1.9px solid #dee2e6; margin-top: 8px; margin-bottom: 8px;"></div>-->
+        </div>
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{doc.company_id.id}_layout {{  'o_report_layout_background' if doc.company_id.layout_background in ['Geometric', 'Custom']  else  '' }}"
+             t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % doc.company_id.layout_background_image.decode('utf-8') if doc.company_id.layout_background_image and doc.company_id.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if doc.company_id.layout_background == 'Geometric' else ''}});"
+             t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-out="0"/>
+        </div>
+        <div t-attf-class="footer o_standard_footer o_company_#{doc.company_id.id}_layout">
+            <div style="border-top: 2px solid #D3D3D3; padding-top: 5px; font-size: 10px; color: #666;">
+                 <div>
+
+                    <!-- LEFT SIDE (Company Name + Title) -->
+                    <div class="col-7" style="float: left; text-align: left; font-weight: 900;">
+
+                        <!-- Company Name Based on ID -->
+<!--                        <t t-if="doc.company_id.name == 'MRL Trading L.L.C'">-->
+<!--                            <p class="text-muted" style="font-size: 38px; color: #444; letter-spacing: 1px;">-->
+<!--                                M R L TRADING L.L.C-->
+<!--                            </p>-->
+<!--                        </t>-->
+
+<!--                        <t t-if="doc.company_id.name == 'MRL TRADING FZC'">-->
+<!--                            <p class="text-muted" style="font-size: 38px; color: #444; letter-spacing: 1px;">-->
+<!--                                M R L TRADING FZC-->
+<!--                            </p>-->
+<!--                        </t>-->
+
+                        <div style="font-size: 18px;">
+                            <strong t-esc="doc.company_id.name"/>
+                        </div>
+
+                        <p style="font-size: 13px; border-top: 1px solid black;border-bottom: 1px solid black;letter-spacing: 1px;">
+                            DEALERS IN FERROUS - NON-FERROUS METALS
+                        </p>
+                    </div>
+
+                    <!-- RIGHT SIDE (Address Based on Company ID) -->
+                    <div class="text-muted col-5" style="float: right; text-align: right;">
+
+                        <!-- Address for MRL Trading LLC (company_id = 1) -->
+                        <t t-if="doc.company_id.name == 'MRL Trading L.L.C'">
+                            <span style="font-size:10px; font-weight:bold;white-space:nowrap;">
+                                PO BOX : 185557, Dubai - United Arab Emirates, Tel : +971-42240332
+                            </span>
+                        </t>
+
+                        <!-- Address for MRL Trading FZC (company_id = 2) -->
+                        <t t-if="doc.company_id.name == 'MRL TRADING FZC'">
+                            <span style="font-size:8px;display: inline-block; font-weight:bold;white-space: nowrap;">
+                                PO BOX : 185557, Hamriyah Free Zone, Sharjah - United Arab Emirates, Tel : +971-42240332
+                            </span>
+                        </t>
+
+                        <div style="font-size:10px; font-weight:bold; margin-top: 5px;white-space: nowrap;">
+                            E-mail : mails@mrltrading.net | Website :
+                            <a href="http://www.mrltrading.net" style="color:#666; text-decoration: none;">www.mrltrading.net</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="clear: both;"></div>
+            </div>
+
+            <!-- Page Numbering -->
+            <div class="text-center text-muted" style="font-size: 10px; padding-top: 5px;">
+                <span t-if="report_type == 'pdf'">Page:
+                    <span class="page"/>
+                    /
+                    <span class="topage"/>
+                </span>
+            </div>
+        </div>
+    </template>
+</odoo>

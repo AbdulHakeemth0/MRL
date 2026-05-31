@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_for_cir" model="report.paperformat">
+        <field name="name">Custom Paperformat for the Invoice report</field>
+        <field name="default" eval="False"/>
+        <field name="disable_shrinking" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">42</field>
+        <field name="margin_bottom">30</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_spacing">40</field>
+        <field name="dpi">96</field>
+    </record>
+    <record id="action_report_jk_purchase_order" model="ir.actions.report">
+        <field name="name">MRL PO REPORT</field>
+        <field name="model">purchase.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ad_jk_po_report.jk_report_purchaseorder</field>
+        <field name="report_file">ad_jk_po_report.jk_report_purchaseorder</field>
+        <field name="print_report_name">
+            "%s%s-PO" % (object.date_order.strftime(''), object.name)
+        </field>
+        <!--        <field name="print_report_name">-->
+        <!--            (object.state in ('draft', 'sent') and 'Request for Quotation - %s' % (object.name) or-->
+        <!--            'Purchase Order - %s' % (object.name))-->
+        <!--        </field>-->
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_type">report</field>
+    </record>
+    <record id="action_report_jk_invoice" model="ir.actions.report">
+        <field name="name">Commercial Invoice</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ad_jk_po_report.jk_report_invoice</field>
+        <field name="report_file">ad_jk_po_report.jk_report_invoice</field>
+        <field name="print_report_name">
+            "%s%s-CI" % (
+            object.invoice_date.strftime('') if object.invoice_date else '',
+            object.name or ''
+            )
+
+            <!--                     "%s%s-CI" % (object.date_order.strftime('%y'), object.name)-->
+
+        </field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+        <!--        <field name="paperformat_id" ref="paperformat_for_cir"/>-->
+    </record>
+    <record id="action_report_jk_sale_order" model="ir.actions.report">
+        <field name="name">MRL SO REPORT</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ad_jk_po_report.report_mrlorder</field>
+        <field name="report_file">ad_jk_po_report.report_mrlorder</field>
+        <field name="print_report_name">
+            "%s%s-SO" % (object.date_order.strftime(''), object.name)
+        </field>
+
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+<!--    <record id="action_report_jk_performance_invoice" model="ir.actions.report">-->
+<!--        <field name="name">MRL-Proforma Invoice</field>-->
+<!--        <field name="model">sale.order</field>-->
+<!--        <field name="report_type">qweb-pdf</field>-->
+<!--        <field name="report_name">ad_jk_po_report.jk_report_performance_invoice</field>-->
+<!--        <field name="report_file">ad_jk_po_report.jk_report_performance_invoice</field>-->
+<!--        <field name="print_report_name">-->
+<!--            "%s%s-PI" % (object.date_order.strftime('%y') if object.date_order else '', object.name)-->
+<!--        </field>-->
+
+<!--        <field name="binding_model_id" ref="sale.model_sale_order"/>-->
+<!--        <field name="binding_type">report</field>-->
+<!--    </record>-->
+     <record id="action_report_jk_performance_invoice_account_move" model="ir.actions.report">
+        <field name="name">MRL-Proforma Invoice</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ad_jk_po_report.jk_report_performance_invoice</field>
+        <field name="report_file">ad_jk_po_report.jk_report_performance_invoice</field>
+        <field name="print_report_name">
+            "%s%s-PI" % (object.invoice_date.strftime('%y') if object.invoice_date else '', object.name)
+        </field>
+
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+    </record>
+
+<!--        <record id="action_report_jk_performance_invoice" model="ir.actions.report">-->
+<!--            <field name="name">Proforma Invoice</field>-->
+<!--            <field name="model">account.move</field>-->
+<!--            <field name="report_type">qweb-pdf</field>-->
+<!--            <field name="report_name">ad_jk_po_report.jk_report_performance_invoice</field>-->
+<!--            <field name="report_file">ad_jk_po_report.jk_report_perforamce_invoice</field>-->
+<!--            <field name="print_report_name">-->
+<!--            "%s%s-PI" % (object.invoice_date.strftime(''), object.name)-->
+<!--             </field>-->
+<!--    &lt;!&ndash;       <field name="print_report_name">&ndash;&gt;-->
+<!--    &lt;!&ndash;    "'%s%s-PR' % ((object.invoice_date.strftime('%y') if object.invoice_date else ''), (object.name or ''))"&ndash;&gt;-->
+<!--    &lt;!&ndash;</field>&ndash;&gt;-->
+<!--            <field name="binding_model_id" ref="account.model_account_move"/>-->
+<!--            <field name="binding_type">report</field>-->
+<!--        </record>-->
+
+</odoo>

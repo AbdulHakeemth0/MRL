@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_certificate_freight">
+        <t t-call="ad_jk_links_to_task.freight_certificate_jk_template">
+            <main>
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page" style="font-size:12px; font-family: Helvetica, sans-serif; line-height: 1.5;">
+<!--                        <div class="text-center" style="margin-bottom:25px;">-->
+<!--                            <h2 style="margin:0; font-size:20px; font-weight:700; letter-spacing:1px;-->
+<!--                                text-transform:uppercase; color:#2F4F4F; display:inline-block;-->
+<!--                                position:relative; padding-bottom:6px; white-space:nowrap; ">-->
+<!--                                FREIGHT CERTIFICATE-->
+<!--                                <span style="position:absolute; left:0; bottom:0; width:100%; height:2px; background-color:#444; "/>-->
+<!--                            </h2>-->
+<!--                        </div>-->
+
+                        <div class="row">
+                            <div class="col-6" style="padding-right: 15px;">
+                                <div style="font-weight: bold;">
+                                    Shipper:
+                                </div>
+                                <hr style="border: none; border-top: 1.9px solid #555; margin: 8px 0;"/>
+                                <div>
+                                    <strong><span t-esc="doc.shipper.name"/></strong>
+                                    <br/>
+                                    <t t-esc="doc.shipper.street"/>
+                                    <t t-if="doc.shipper.street2">
+                                        <br/>
+                                        <t t-esc="doc.shipper.street2"/>
+                                    </t>
+                                    <br/>
+                                    Tel: <t t-esc="doc.shipper.phone"/>
+                                    <br/>
+                                    E-mail: <t t-esc="doc.shipper.email"/> | Website: <t t-esc="doc.shipper.website"/>
+                                </div>
+                            </div>
+                            <div class="col-6" style="padding-left: 15px;">
+                                <div style="font-weight: bold;">
+                                    Consignee / Notify:
+                                </div>
+                                <hr style="border: none; border-top: 1.9px solid #555; margin: 8px 0;"/>
+                                <div>
+                                    <strong><t t-esc="doc.consignee.name"/></strong>
+                                    <br/>
+                                    <t t-esc="doc.consignee.street"/>
+                                    <t t-if="doc.consignee.street2">
+                                        <br/>
+                                        <t t-esc="doc.consignee.street2"/>
+                                    </t>
+                                    |
+                                    <t t-if="doc.consignee.zip">
+                                        PIN CODE: <t t-esc="doc.consignee.zip"/>
+                                    </t>
+                                    <br/>
+                                    <t t-if="doc.consignee.state_id">
+                                        STATE: <t t-esc="doc.consignee.state_id.name"/>
+                                    </t> |
+                                    <t t-if="doc.consignee.country_id">
+                                        COUNTRY: <t t-esc="doc.consignee.country_id.name"/>
+                                    </t>
+                                    <br/>
+                                    GSTIN: <t t-esc="doc.consignee.vat"/> | PAN NO: <t t-esc="doc.consignee.pan_no"/>
+                                    <br/>
+                                    IEC Code: <t t-esc="doc.consignee.iec_code"/> | <t t-if="doc.consignee.contact_person_id">
+                                    Contact: <t t-esc="doc.consignee.contact_person_id.name"/>
+                                </t>
+                                    |
+                                    PHONE: <t t-esc="doc.consignee.phone"/>
+                                    <br/>
+                                    EMAIL: <t t-esc="doc.consignee.email"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 20px;">
+                            <p>We clarify that we have paid ocean freight on export of goods as details below.</p>
+                        </div>
+
+
+                        <table class="table table-borderless" style="width: 100%; margin-top: 20px;">
+                            <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                <td style="padding: 8px 5px; border: none; width: 25%; background-color: #f2f9fc;">
+                                    <strong>MATERIAL DESCRIPTION</strong>
+                                </td>
+                                <td style="padding: 8px 5px; border: none; width: 75%;">
+                                    <t t-esc="doc.material_description"/>
+                                </td>
+                            </tr>
+
+                            <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                <td style="padding: 8px 5px; border: none; width: 25%; background-color: #f2f9fc;">
+                                    <strong>BILL OF LOADING NO</strong>
+                                </td>
+                                <td style="padding: 8px 5px; border: none; width: 75%;">
+                                    <t t-esc="doc.bill_of_loading_no"/>
+                                </td>
+                            </tr>
+
+                            <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                <td style="padding: 8px 5px; border: none; width: 25%; background-color: #f2f9fc;">
+                                    <strong>VESSEL NAME </strong>
+                                </td>
+                                <td style="padding: 8px 5px; border: none; width: 75%;">
+                                    <t t-esc="doc.vessel_name"/>
+                                </td>
+                            </tr>
+
+                            <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                <td style="padding: 8px 5px; border: none; width: 25%; background-color: #f2f9fc;">
+                                    <strong>VOYAGE NO</strong>
+                                </td>
+                                <td style="padding: 8px 5px; border: none; width: 75%;">
+                                    <t t-esc="doc.voyage_no"/>
+                                </td>
+                            </tr>
+
+                            <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                <td style="padding: 8px 5px; border: none;  width: 25%; background-color: #f2f9fc;">
+                                    <strong>SHIPPED ON BOARD</strong>
+                                </td>
+                                <td style="padding: 8px 5px; border: none; width: 75%;">
+                                    <t t-esc="doc.shipped_on_board"/>
+                                </td>
+                            </tr>
+
+                           <tr style="border-bottom: 1px solid #dee2e6;">
+                                <td style="padding: 8px 5px; border: none; width: 25%; background-color: #f2f9fc;">
+                                    <strong>OCEAN FREIGHT</strong>
+                                </td>
+                                <td style="padding: 8px 5px; border: none; width: 75%; text-align: left;">
+                                   <span>
+                                        <t t-out="doc.company_id.currency_id.symbol"/>
+                                        <t t-out="' %.2f' % (doc.ocean_freight or 0.0)"/>
+                                    </span>
+
+
+                                </td>
+                            </tr>
+
+                        </table>
+
+
+                        <div class="row" style="margin-top: 260px;">
+                            <div class="col-6"/>
+                            <div class="col-6" style="padding-right: 15px;">
+                                <table class="table table-borderless" style="width: 80%;">
+                                    <tr style="border-top: 1px solid black;">
+                                        <div class="row mt-4">
+                                            <div class="col-12" style="text-align: center;">
+<!--                                                <img t-if="doc.company_id"-->
+<!--                                                     t-att-src="image_data_uri(doc.company_id.signature)"-->
+<!--                                                     style="max-height: 180px;text-align: center; margin-top: -70px;" alt="Logo"/>-->
+                                                <t t-if="doc.company_id.show_signature_stamp_1 and doc.company_id.signature_stamp_1">
+                                                    <img t-att-src="image_data_uri(doc.company_id.signature_stamp_1)"
+                                                         style="max-height: 180px; display: block; margin: 0 auto;"
+                                                         alt="Signature Stamp LLC"/>
+                                                    <p style="margin-top: 10px; font-weight: bold;"></p>
+                                                </t>
+                                                <t t-elif="doc.company_id.show_signature_stamp_2 and doc.company_id.signature_stamp_2">
+                                                    <img t-att-src="image_data_uri(doc.company_id.signature_stamp_2)"
+                                                         style="max-height: 160px; display: block; margin: 0 auto;"
+                                                         alt="Signature Stamp FZC"/>
+                                                    <p style="margin-top: 10px; font-weight: bold;"></p>
+                                                </t>
+
+                                            </div>
+                                        </div>
+                                        <td style="padding: 5px 5px 0 5px; border: none; text-align: center;">
+                                            <div style="font-weight: bold; font-size: 1em; color: #000; margin-top: 5px;">
+                                                FOR, <span t-esc="doc.company_id.partner_id.name"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 1px 5px 5px 5px; text-align: center; border: none; ">
+                                            <div style="font-size: 0.9em; color: #000; font-style: italic;">
+                                                Authorised Signature
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </main>
+        </t>
+    </template>
+    <record id="certificate_freight_report_action" model="ir.actions.report">
+        <field name="name">Freight Certificate</field>
+        <field name="model">freight.certificate</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ad_jk_links_to_task.report_certificate_freight</field>
+        <field name="report_file">ad_jk_links_to_task.report_certificate_freight</field>
+        <field name="print_report_name">"%s%s-FC" % (
+        object.shipped_on_board.strftime('') if object.shipped_on_board else '',
+        object.number or ''
+    )</field>
+    </record>
+</odoo>

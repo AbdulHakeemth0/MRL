@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_final_destination_tree" model="ir.ui.view">
+        <field name="name">final.destination.tree</field>
+        <field name="model">final.destination</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="fd_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_final_destination_form" model="ir.ui.view">
+        <field name="name">final.destination.form</field>
+        <field name="model">final.destination</field>
+        <field name="arch" type="xml">
+            <form string="Final Destination">
+                <sheet>
+                    <group>
+                        <field name="fd_name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_final_destination_tree" model="ir.ui.view">
+        <field name="name">final.destination.tree</field>
+        <field name="model">final.destination</field>
+        <field name="arch" type="xml">
+            <tree string="Final Destination">
+                <field name="fd_name"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_final_destination" model="ir.actions.act_window">
+        <field name="name">Final Destination</field>
+        <field name="res_model">final.destination</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_final_destination_root"
+              name="Final Destination"
+              parent="project.menu_project_management"
+              action="action_final_destination"/>
+</odoo>

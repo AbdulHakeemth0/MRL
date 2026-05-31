@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form.view.inherit.ad.jk.links.to.task</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="doc_created" invisible="1"/>
+            </field>
+            <field name="partner_id" position="after">
+                <field name="partner_bank_id" string="Bank"/>
+            </field>
+            <xpath expr="//header" position="inside">
+                <button name="action_create_document" type="object" string="Create Other Documents"
+                        />
+            </xpath>
+<!--            invisible="move_type not in ['out_invoice']-->
+            <xpath expr="//page[@id='other_tab']" position="after">
+                <page id="doc_inf"
+                      string="Document Information">
+                    <group>
+                        <group>
+                        <field name="container_no"/>
+                        <field name="bill_of_lading_no"/>
+                        <field name="shipped_on_board"/>
+                        <field name="vessel_name"/>
+                        <field name="voyage_no"/>
+                        <field name="port_of_loading"/>
+                        <field name="discharge_of_port"/>
+                        <field name="final_destination"/>
+                        <field name="packing"/>
+                        <field name="freight_term"/>
+                    </group>
+                        <group string="Certificate of Analysis">
+                            <field name="seal_no"/>
+                            <field name="chemical_elements_present"/>
+                        </group>
+                    </group>
+                    <group string="Freight Certificate">
+                        <field name="ocean_freight"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,26 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_certificate_origin,access.certificate.origin,model_certificate_origin,,1,1,1,1
+access_packing_list,access.packing.list,model_packing_list,,1,1,1,1
+access_certificate_analysis,access.certificate.analysis,model_certificate_analysis,,1,1,1,1
+access_packing_material,access.packing.material,model_packing_material,,1,1,1,1
+access_freight_certificate,access.freight.certificate,model_freight_certificate,,1,1,1,1
+access_movement_document,access.movement.document,model_movement_document,,1,1,1,1
+access_movement_document_list,access.movement.document.list,model_movement_document_list,,1,1,1,1
+access_form_document,access.form.document,model_form_document,,1,1,1,1
+access_form_document_list,access.form.document.list,model_form_document_list,,1,1,1,1
+access_sale_packing,access.sale.packing,model_sale_packing,,1,1,1,1
+access_port_loading,access.port.loading,model_port_loading,,1,1,1,1
+access_port_discharge,access.port.discharge,model_port_discharge,,1,1,1,1
+access_delivery_terms,access.delivery.terms,model_delivery_terms,,1,1,1,1
+access_payment_mode,access.payment.mode,model_payment_mode,,1,1,1,1
+access_po_yard,access.po.yard,model_po_yard,,1,1,1,1
+access_sale_note_attachment,access.sale.note.attachment,model_sale_note_attachment,,1,1,1,1
+access_inv_related_doc,access.inv.related.doc,model_inv_related_doc,,1,1,1,1
+access_port_discharge_manager,access_port_discharge_manager,model_port_discharge,base.group_user,1,1,1,1
+access_port_loading_user,access.port.loading_user,model_port_loading,base.group_user,1,1,1,1
+access_loading_time,access_loading_time,model_loading_time,,1,1,1,1
+access_loading_time_user,access_loading_time_user,model_loading_time,base.group_user,1,1,1,1
+access_final_destination_user,access_final_destination_user,model_final_destination,base.group_user,1,1,1,1
+access_mode_payment_user,access_mode_payment_user,model_mode_payment,base.group_user,1,1,1,1
+access_delivery_terms_user,delivery.terms user,model_delivery_terms,,1,0,0,0
+access_delivery_terms_manager,delivery.terms manager,model_delivery_terms,base.group_system,1,1,1,1

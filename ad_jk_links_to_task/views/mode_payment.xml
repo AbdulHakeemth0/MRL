@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_mode_payment_tree" model="ir.ui.view">
+        <field name="name">mode.payment.tree</field>
+        <field name="model">mode.payment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="m_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_mode_payment_form" model="ir.ui.view">
+        <field name="name">mode.payment.form</field>
+        <field name="model">mode.payment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="m_name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Action -->
+    <record id="action_mode_payment" model="ir.actions.act_window">
+        <field name="name">Mode Payment</field>
+        <field name="res_model">mode.payment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_mode_payment_root"
+              name="Mode Payment"
+              parent="project.menu_project_management"
+              action="action_mode_payment"/>
+</odoo>

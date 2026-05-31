@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_port_loading_tree" model="ir.ui.view">
+        <field name="name">port.loading.tree</field>
+        <field name="model">port.loading</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="pl_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_port_loading_form" model="ir.ui.view">
+        <field name="name">port.loading.form</field>
+        <field name="model">port.loading</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="pl_name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_port_loading_tree" model="ir.ui.view">
+        <field name="name">port.loading.tree</field>
+        <field name="model">port.loading</field>
+        <field name="arch" type="xml">
+            <tree string="Port Loading">
+                <field name="pl_name"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_port_loading" model="ir.actions.act_window">
+        <field name="name">Port Loading</field>
+        <field name="res_model">port.loading</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_port_loading"
+              name="Port Loading"
+              parent="project.menu_project_management"
+              action="action_port_loading"
+              sequence="10"/>
+</odoo>

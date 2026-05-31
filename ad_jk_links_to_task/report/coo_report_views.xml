@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_certificate_origin">
+        <t t-call="ad_jk_links_to_task.certificate_origin_jk_template">
+            <main>
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page" style="font-size:12px; font-family: Helvetica, sans-serif; line-height: 1.5;">
+<!--                        <div class="text-center" style="margin-bottom:25px;">-->
+<!--                            <h2 style="margin:0; font-size:20px; font-weight:700; letter-spacing:1px;-->
+<!--                                text-transform:uppercase; color:#2F4F4F; display:inline-block;-->
+<!--                                position:relative; padding-bottom:6px; white-space:nowrap; ">-->
+<!--                                CERTIFICATE OF ORIGIN-->
+<!--                                <span style="position:absolute; left:0; bottom:0; width:100%; height:2px; background-color:#444; "/>-->
+<!--                            </h2>-->
+<!--                        </div>-->
+
+                        <div class="row">
+                            <div class="col-6" style="padding-right: 15px;">
+                                <div style="font-weight: bold;">
+                                    Shipper:
+                                </div>
+                                <hr style="border: none; border-top: 1.9px solid #555; margin: 8px 0;"/>
+                                <div>
+                                        <strong t-esc="doc.company_id.name"/>
+                                    <br/>
+
+                                    <t t-if="doc.company_id.street">
+                                        <t t-esc="doc.company_id.street"/><br/>
+                                    </t>
+                                    <t t-if="doc.company_id.street2">
+                                        <t t-esc="doc.company_id.street2"/><br/>
+                                    </t>
+                                    <t t-if="doc.company_id.city">
+                                        <t t-esc="doc.company_id.city"/>,
+                                    </t>
+                                    <t t-if="doc.company_id.state_id.name">
+                                        <t t-esc="doc.company_id.state_id.name"/>,
+                                    </t>
+                                    <t t-if="doc.company_id.country_id.name">
+                                        <t t-esc="doc.company_id.country_id.name"/><br/>
+                                    </t>
+
+                                    <t t-if="doc.company_id.phone">
+                                        Tel: <t t-esc="doc.company_id.phone"/><br/>
+                                    </t>
+                                    <t t-if="doc.company_id.email">
+                                        Email: <t t-esc="doc.company_id.email"/><br/>
+                                    </t>
+                                    <t t-if="doc.company_id.website">
+                                        Website: <t t-esc="doc.company_id.website"/><br/>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="col-6" style="padding-left: 15px;">
+                                <div style="font-weight: bold;">
+                                    Consignee / Notify:
+                                </div>
+                                <hr style="border: none; border-top: 1.9px solid #555; margin: 8px 0;"/>
+                                <div>
+                                    <strong><t t-esc="doc.consignee_info_id.name"/></strong>
+                                    <br/>
+                                    <t t-esc="doc.consignee_info_id.street"/>
+                                    <t t-if="doc.consignee_info_id.street2">
+                                        <br/>
+                                        <t t-esc="doc.consignee_info_id.street2"/> |
+                                    </t>
+
+                                    <t t-if="doc.consignee_info_id.zip">
+                                        PIN CODE: <t t-esc="doc.consignee_info_id.zip"/>
+                                    </t>
+                                    <br/>
+                                    <t t-if="doc.consignee_info_id.state_id">
+                                        STATE: <t t-esc="doc.consignee_info_id.state_id.name"/> |
+                                    </t>
+                                    <t t-if="doc.consignee_info_id.country_id">
+                                        COUNTRY: <t t-esc="doc.consignee_info_id.country_id.name"/>
+                                    </t>
+                                    <br/>
+                                    <t t-if="doc.consignee_info_id.vat">
+                                        GSTIN: <t t-esc="doc.consignee_info_id.vat"/> |
+                                    </t>
+                                    <t t-if="doc.consignee_info_id.pan_no">
+                                        PAN NO: <t t-esc="doc.consignee_info_id.pan_no"/>
+                                    </t>
+                                    <br/>
+                                    <t t-if="doc.consignee_info_id.iec_code">
+                                        IEC Code: <t t-esc="doc.consignee_info_id.iec_code"/> |
+                                    </t>
+                                    <t t-if="doc.consignee_info_id.contact_person_id">
+                                        Contact: <t t-esc="doc.consignee_info_id.contact_person_id.name"/> |
+                                    </t>
+                                    PHONE: <t t-esc="doc.consignee_info_id.phone"/>
+                                    <br/>
+                                    EMAIL: <t t-esc="doc.consignee_info_id.email"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table table-borderless" style="width:100%; margin-top: 10px;">
+                            <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                <td style="padding: 5px; border: none; background-color: #f2f9fc;">
+                                    <strong>Invoice No.</strong>
+                                </td>
+                                <td style="padding: 5px; border: none;">
+                                    <p t-field="doc.invoice_id.name"/>
+                                </td>
+<!--                                <td style="padding: 5px; border: none;">-->
+<!--                                    <p t-field="doc.invoice_id"/>-->
+<!--                                </td>-->
+                                <td style="padding: 5px; border: none; background-color: #f2f9fc;">
+                                    <strong>Invoice Date</strong>
+                                </td>
+                                <td style="padding: 5px; border: none;">
+                                    <p t-esc="doc.invoice_date"/>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                <td style="padding: 5px; border: none; background-color: #f2f9fc;">
+                                    <strong>Contract No.</strong>
+                                </td>
+                                <td style="padding: 5px; border: none;">
+                                    <p><t t-esc="doc.contract_no"/></p>
+                                </td>
+                                <td style="padding: 5px; border: none; background-color: #f2f9fc;">
+                                    <strong>Contract Date</strong>
+                                </td>
+                                <td style="padding: 5px; border: none;">
+                                    <p><span t-esc="doc.contract_date"/></p>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                        <div style="text-align: center;
+                                background-color: #f2f9fc;
+                                border: 1px solid #999;
+                                border-radius: 6px;
+                                padding: 8px 12px;
+                                margin: 10px auto;
+                                width: 100%;
+                                font-weight: 600;
+                                color: #333;">
+                            <p>
+                                This is to certify that the goods loaded in the container
+                                <span t-field="doc.container_no"/>
+                                belongs to our Invoice No
+                                <span t-field="doc.invoice_id"/>
+                                and are of
+                                <span t-field="doc.port_of_loading"/>
+                                Origin. We also certify that this material does not contain any spent and unspent war radioactive materials and it is free from any form of arms, ammunitions, and explosives.
+                            </p>
+                        </div>
+
+
+                        <div class="row" style="margin-top: 270px;">
+                            <div class="col-6"/>
+                            <div class="col-6" style="padding-right: 15px;">
+                                <table class="table table-borderless" style="width: 80%;">
+                                    <tr style="border-top: 1px solid black;">
+                                        <div class="row mt-4">
+                                            <div class="col-12" style="text-align: center;">
+<!--                                                <img t-if="doc.company_id"-->
+<!--                                                     t-att-src="image_data_uri(doc.company_id.signature)"-->
+<!--                                                     style="max-height: 180px;text-align: center; margin-top: -120px;" alt="Logo"/>-->
+                                                <t t-if="doc.company_id.show_signature_stamp_1 and doc.company_id.signature_stamp_1">
+                                                    <img t-att-src="image_data_uri(doc.company_id.signature_stamp_1)"
+                                                         style="max-height: 180px; display: block; margin: 0 auto;"
+                                                         alt="Signature Stamp LLC"/>
+                                                    <p style="margin-top: 10px; font-weight: bold;"></p>
+                                                </t>
+                                                <t t-elif="doc.company_id.show_signature_stamp_2 and doc.company_id.signature_stamp_2">
+                                                    <img t-att-src="image_data_uri(doc.company_id.signature_stamp_2)"
+                                                         style="max-height: 160px; display: block; margin: 0 auto;"
+                                                         alt="Signature Stamp FZC"/>
+                                                    <p style="margin-top: 10px; font-weight: bold;"></p>
+                                                </t>
+
+                                            </div>
+                                        </div>
+                                        <td style="padding: 5px 5px 0 5px; border: none; text-align: center;">
+                                            <div style="font-weight: bold; font-size: 1em; color: #000;">
+                                                FOR, <span t-esc="doc.company_id.partner_id.name"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 1px 5px 5px 5px; text-align: center; border: none; ">
+                                            <div style="font-size: 0.9em; color: #000; font-style: italic;">
+                                                Authorised Signature
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </main>
+        </t>
+    </template>
+    <record id="certificate_origin_report_action" model="ir.actions.report">
+        <field name="name">Certificate of Origin</field>
+        <field name="model">certificate.origin</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ad_jk_links_to_task.report_certificate_origin</field>
+        <field name="report_file">ad_jk_links_to_task.report_certificate_origin</field>
+        <field name="print_report_name">
+            "%s%s-CO" % (
+        object.invoice_date.strftime('') if object.invoice_date else '',
+        object.number or ''
+    )
+
+        </field>
+    </record>
+</odoo>

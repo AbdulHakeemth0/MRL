@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="jk_report_purchaseorder_document">
+        <t t-call="ad_jk_po_report.external_layout_jk_template_purchase_order">
+            <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+            <div class="page" style="font-size:11px; font-family: Helvetica, sans-serif; line-height: 1.5;">
+                <div class="text-center" style="margin-bottom:25px;">
+<!--                    <h2 style="margin:0; font-size:20px; font-weight:700; letter-spacing:1px;-->
+<!--                        text-transform:uppercase; color:#2F4F4F; display:inline-block;-->
+<!--                        position:relative; padding-bottom:6px; white-space:nowrap; ">-->
+<!--                        PURCHASE ORDER-->
+<!--                        <span style="position:absolute; left:0; bottom:0; width:100%; height:2px; background-color:#444; "/>-->
+<!--                    </h2>-->
+                </div>
+
+                <div class="row" style="margin-top: -10px;">
+                    <div class="col-6" style="padding-right: 15px;">
+                        <div style="font-weight: bold;">
+                            Buyer:
+                        </div>
+                        <hr style="border: none; border-top: 1.9px solid #555; margin: 8px 0;"/>
+                        <div>
+                            <strong t-esc="o.company_id.name"/>
+                            <br/>
+
+                            <t t-if="o.company_id.street">
+                                <t t-esc="o.company_id.street"/><br/>
+                            </t>
+                            <t t-if="o.company_id.street2">
+                                <t t-esc="o.company_id.street2"/><br/>
+                            </t>
+                            <t t-if="o.company_id.city">
+                                <t t-esc="o.company_id.city"/>,
+                            </t>
+                            <t t-if="o.company_id.state_id.name">
+                                <t t-esc="o.company_id.state_id.name"/>,
+                            </t>
+                            <t t-if="o.company_id.country_id.name">
+                                <t t-esc="o.company_id.country_id.name"/><br/>
+                            </t>
+
+                            <t t-if="o.company_id.phone">
+                                Tel: <t t-esc="o.company_id.phone"/><br/>
+                            </t>
+                            <t t-if="o.company_id.email">
+                                Email: <t t-esc="o.company_id.email"/><br/>
+                            </t>
+                            <t t-if="o.company_id.website">
+                                Website: <t t-esc="o.company_id.website"/><br/>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="col-6" style="padding-left: 15px;">
+                        <div style="font-weight: bold;">
+                            Supplier:
+                        </div>
+                        <hr style="border: none; border-top: 1.9px solid #555; margin: 8px 0;"/>
+                        <div>
+                            <strong><t t-esc="o.partner_id.name"/></strong>
+                            <br/>
+                            <t t-esc="o.partner_id.street"/>
+                            <t t-if="o.partner_id.country_id">
+                                <br/>
+                                COUNTRY: <t t-esc="o.partner_id.country_id.name"/>
+                            </t>
+                            <br/>
+                            CR NO: <t t-esc="o.partner_id.cr_number"/>
+                            <br/>
+                            CONTACT PERSON: <t t-esc="o.partner_id.contact_person_id.name"/>
+                            <br/>
+                            <t t-if="o.partner_id.phone">
+                                CONTACT NO: <t t-esc="o.partner_id.phone"/>
+                            </t>
+                            <br/>
+                            Email: <t t-esc="o.partner_id.email"/>
+                            <br/>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <table class="table table-borderless" style="width:100%; margin-top: 10px;">
+                    <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                        <td style="padding: 5px; border: none; background-color: #f2f9fc;">
+                            <strong>PO Number</strong>
+                        </td>
+                        <td style="padding: 5px; border: none;">
+                            <p t-field="o.name"/>
+                        </td>
+                        <td style="padding: 5px; border: none; background-color: #f2f9fc;">
+                            <strong>PO Date</strong>
+                        </td>
+                        <td style="padding: 5px; border: none;">
+                            <p t-esc="o.date_order.date()"/>
+                        </td>
+                    </tr>
+                </table>
+
+                <div style="text-align: center;">
+                    <p>THIS IS TO CONFIRM THAT <b>“<span t-out="o.company_id.partner_id.name"/>”</b>(HERE AFTER REF TO BUYER) AGREE TO BUY &amp;
+                    <b><span t-field="o.partner_id.name"/></b>(HERE AFTER REF TO SELLER) AGREE TO SELL AS PER
+                        THE TERMS &amp; CONDITION STIPULATED HERE UNDER:-
+                    </p>
+                </div>
+
+
+                <table class="table table-borderless" style="width:100%; margin-top: 10px;">
+                    <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                    <thead style="background-color: #f2f9fc;">
+                        <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                            <th style="border: none;" class="text-start">MATERIAL DESCRIPTION</th>
+                            <th style="border: none;" class="text-start">HSN CODE</th>
+                            <th style="border: none;" class="text-start">QUANTITY (+/-10%)</th>
+                            <th style="border: none;" class="text-start">NO OF CONTAINERS</th>
+                            <th style="border: none;" class="text-start">PACKING</th>
+                            <th style="border: none;" class="text-start">UNIT PRICE</th>
+                            <th style="border: none;" class="text-start">AMOUNT</th>
+                        </tr>
+                    </thead>
+                    <tbody class="">
+                        <t t-foreach="o.order_line" t-as="line">
+                            <tr t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''"
+                            style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                                    <td style="border: none;" name="td_name">
+                                        <span t-field="line.name">Bacon Burger</span>
+                                        <br/>
+                                        <span t-field="line.attachment_details"></span>
+                                    </td>
+
+                                    <td style="border: none;">
+                                        <span t-field="line.product_id.product_tmpl_id.hsn_code"/>
+                                    </td>
+
+                                    <td style="border: none;" name="td_quantity">
+                                        <span t-esc="int(line.product_qty)"/>
+                                        <span t-field="line.product_uom"/>
+                                    </td>
+                                    <td style="border: none;">
+                                        <span t-field="line.number_of_containers"/>
+                                    </td>
+                                    <td style="border: none;">
+                                        <span t-field="line.packing_details"/>
+                                    </td>
+                                    <td style="border: none;">
+                                        <span t-field="line.price_unit"
+                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    </td>
+                                    <td style="border: none;">
+                                        <span t-field="line.price_subtotal"
+                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    </td>
+                            </tr>
+                        </t>
+                        <tr style="border-bottom: 1px solid #dee2e6; border-color: #dee2e6;">
+                            <td style="border: none; font-weight:bold">
+                                TOTAL
+                            </td>
+                            <td/>
+                            <td style="border: none; font-weight:bold">
+                                <span t-esc="sum(o.order_line.mapped('product_qty'))">3</span>
+                                <span t-field="line.product_uom">units</span>
+                            </td>
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td class="o_price_total" style="border: none; font-weight:bold">
+<!--                                <t t-set="sum(lines_to_report.mapped('price_subtotal'))" t-as="total_value"/>-->
+                                <span t-field="o.amount_total"></span>
+<!--                                <t t-esc="sum(lines_to_report.mapped('price_subtotal'))"/>-->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-6" style="padding-right: 15px;">
+                        <div style="font-weight: bold;">
+                            Amount in Words:
+                        </div>
+                        <div>
+                            <span t-esc="o.currency_id.amount_to_text(o.amount_total) + ' Only'"/>
+                        </div>
+                    </div>
+                    <div class="col-1"/>
+                    <div class="col-5" style="padding-left: 15px;">
+                        <table class="table table-borderless" style="width: 100%;">
+                            <tr>
+                                <td style="padding: 1px 5px; border: none; text-align: right; width: 60%;">
+                                    Total Amount
+                                </td>
+                                <td style="padding: 1px 5px; border: none; text-align: right; width: 40%;">
+                                    <span t-esc="abs(o.amount_total)"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+<!--                            <tr style="border-bottom: 1px solid black;">-->
+<!--                                <td style="padding: 1px 5px; border: none; text-align: right;">-->
+<!--                                    Less: Advance Amount-->
+<!--                                </td>-->
+<!--                                <td style="padding: 1px 5px; border: none; text-align: right;">-->
+<!--                                    0.00-->
+<!--                                </td>-->
+<!--                            </tr>-->
+                            <tr>
+                                <td style="padding: 5px; border: none; text-align: right; font-weight: bold;">
+                                    BALANCE AMOUNT
+                                </td>
+                                <td style="padding: 5px; border: none; text-align: right; font-weight: bold;">
+                                    <span t-esc="abs(o.amount_total)"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+                <hr style="border: none; border-top: 1.9px solid #555; margin: 8px 0;"/>
+
+                <div style="margin-top: 25px;">
+                    <div>
+                        <h6><strong>Terms &amp; Conditions</strong></h6>
+                    </div>
+
+                    <table class="table table-borderless" style="width: 100%;">
+
+                        <!-- Row 1 -->
+                        <tr style="border-bottom: 1px solid #dee2e6;">
+                            <td style="padding: 8px 5px; background-color: #f2f9fc; width: 15%;"><strong>Payment Terms</strong></td>
+                            <td style="padding: 8px 5px; width: 18%;">
+                                <t t-if="o.payment_term_id">
+                                    <t t-esc="o.payment_term_id.name"/>
+                                </t>
+                            </td>
+
+                            <td style="padding: 8px 5px; background-color: #f2f9fc; width: 15%;"><strong>Yard</strong></td>
+                            <td style="padding: 8px 5px; width: 18%;">
+                                <t t-esc="o.yard.name"/>
+                            </td>
+                            <td style="padding: 8px 5px; background-color: #f2f9fc;"><strong>Mode Payment</strong></td>
+                            <td style="padding: 8px 5px;">
+                                <t t-esc="', '.join(o.mode_ids.mapped('display_name'))"/>
+                            </td>
+
+
+
+                            <!--                            <td style="padding: 8px 5px; background-color: #f2f9fc; width: 15%;"><strong>Port of Discharge</strong></td>-->
+<!--                            <td style="padding: 8px 5px; width: 19%;">-->
+<!--                                <t t-esc="o.dis_ids.name"/>-->
+<!--                            </td>-->
+                        </tr>
+
+                        <!-- Row 2 -->
+                        <tr style="border-bottom: 1px solid #dee2e6;">
+                            <td style="padding: 8px 5px; background-color: #f2f9fc;"><strong>Port of Loading</strong></td>
+                            <td style="padding: 8px 5px;">
+                                <t t-esc="', '.join(o.loading_ids.mapped('pl_name'))"/>
+                            </td>
+
+                            <td style="padding: 8px 5px; background-color: #f2f9fc;"><strong>Port of Discharge</strong></td>
+                            <td style="padding: 8px 5px;">
+                                <t t-esc="', '.join(o.dis_ids.mapped('pd_name'))"/>
+                            </td>
+
+                            <td style="padding: 8px 5px; background-color: #f2f9fc;"><strong>Final Destination</strong></td>
+                            <td style="padding: 8px 5px;">
+                                <t t-esc="', '.join(o.final_ids.mapped('fd_name'))"/>
+                            </td>
+                        </tr>
+
+                        <!-- Row 3 -->
+                        <tr style="border-bottom: 1px solid #dee2e6;">
+                            <td style="padding: 8px 5px; background-color: #f2f9fc;"><strong>Delivery Terms</strong></td>
+                            <td style="padding: 8px 5px;">
+                                <t t-esc="o.delivery_term.display_name"/>
+                            </td>
+
+                            <td style="padding: 8px 5px; background-color: #f2f9fc;"><strong>Loading Time</strong></td>
+                            <td style="padding: 8px 5px;">
+                                <t t-esc="', '.join(o.time_ids.mapped('display_name'))"/>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </div>
+
+                <div style="line-height: 1.6;">
+                    <h6>
+                        <strong>General Terms &amp; Conditions</strong>
+                    </h6>
+                    <ol>
+                        <li> WE REQUIRED CONTAINER LOADING PHOTO WITH INSPECTOR AND INSTRUMENT.
+                            STEP WISE LOADING PICTURES WITHOUT ANY STICKERS/BANNERS OF CONTAINER NUMBER:
+                        </li>
+                        <li>1) 25%, 2) 50%,3) 75%,4) 100% LOADING DONE PHOTOS,5) DOOR CLOSE WITH SEAL INTACT
+                            PHOTOS,6) MATERIAL CLEAR PHOTOS
+                        </li>
+                        <li>THE GOODS SHOULD BE FREE FROM ANY HAZARDOUS WASTE MATERIAL</li>
+                        <li>KINDLY SIGNED THIS PURCHASE ORDER AND RETURN TO US AS A TOKEN OF YOUR ACCEPTANCE</li>
+                    </ol>
+                </div>
+
+                <div>
+                    <h6>
+                        <strong>Bank Details</strong>
+                    </h6>
+                </div>
+                <div class="row">
+                    <div class="col-6" style="padding-right: 15px;">
+                        <div style="font-weight: bold; margin-bottom: 5px;">
+                            Supplier Bank Details:
+                        </div>
+                         <ul style="list-style-type: disc; padding-left: 20px; margin-top: 0;">
+                            <li style="margin-bottom: 2px;">Bank Name: <t t-if="o.partner_bank_id">
+                                <span t-esc="o.partner_bank_id.bank_name"/></t></li>
+                            <li style="margin-bottom: 2px;">Branch: <t t-if="o.partner_bank_id.bank_id">
+                                <span t-esc="o.partner_bank_id.bank_id.branch"/></t></li>
+
+<!--                             <li style="margin-bottom: 2px;">IBAN NO: <t t-if="o.company_bank_id.iban_code">-->
+<!--                                 <span t-out="o.company_bank_id.iban_code"/></t></li>-->
+                            <li style="margin-bottom: 2px;">Account No: <t t-if="o.partner_bank_id">
+                                <span t-esc="o.partner_bank_id.acc_number"/></t></li>
+                            <li style="margin-bottom: 2px;">SWIFT: <t t-if="o.partner_bank_id.bank_id">
+                                <span t-esc="o.partner_bank_id.bank_id.bic"/></t></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6" style="padding-left: 15px;">
+                        <div style="font-weight: bold; margin-bottom: 5px; margin-top: 15px;">
+                            Our (Buyer's) Bank Details:
+                        </div>
+                        <ul style="list-style-type: disc; padding-left: 20px; margin-top: 0;">
+                            <li style="margin-bottom: 2px;">Account Name: <t t-if="o.company_bank_id.partner_id">
+                                <span t-out="o.company_bank_id.partner_id.name"/></t></li>
+                            <li style="margin-bottom: 2px;">Bank Name: <t t-if="o.company_bank_id.bank_id">
+                                <span t-out="o.company_bank_id.bank_id.name"/></t></li>
+                            <li style="margin-bottom: 2px;">Account No: <t t-if="o.company_bank_id">
+                                <span t-out="o.company_bank_id.acc_number"/></t></li>
+                            <li style="margin-bottom: 2px;">SWIFT Code:<t t-if="o.company_bank_id.bank_id">
+                                <span t-out="o.company_bank_id.bank_id.bic"/></t></li>
+                            <li style="margin-bottom: 2px;">Address:<t t-if="o.company_bank_id.bank_id">
+                                <span t-out="o.company_bank_id.bank_id.street"/></t></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 50px;">
+                    <div class="col-6" style="padding-right: 15px;">
+
+                        <table class="table table-borderless" style="width: 80%;">
+                            <tr style="border-top: 1px solid black;">
+                                <div class="row mt-4">
+                                    <div class="col-12" style="text-align: center; margin-top: 240px;">
+<!--                                        <img t-if="o.company_id"-->
+<!--                                             t-att-src="image_data_uri(o.company_id.signature)"-->
+<!--                                             style="max-height: 180px;text-align: center; margin-top: 90px;" alt="Logo"/>-->
+                                        <t t-if="o.company_id.show_signature_stamp_1 and o.company_id.signature_stamp_1">
+                                            <img t-att-src="image_data_uri(o.company_id.signature_stamp_1)"
+                                                 style="max-height: 180px; display: block; margin: 0 auto;"
+                                                 alt="Signature Stamp LLC"/>
+                                            <p style="margin-top: 10px; font-weight: bold;"></p>
+                                        </t>
+                                        <t t-elif="o.company_id.show_signature_stamp_2 and o.company_id.signature_stamp_2">
+                                            <img t-att-src="image_data_uri(o.company_id.signature_stamp_2)"
+                                                 style="max-height: 160px; display: block; margin: 0 auto;"
+                                                 alt="Signature Stamp FZC"/>
+                                            <p style="margin-top: 25px; font-weight: bold;"></p>
+                                        </t>
+
+                                    </div>
+                                </div>
+                                <td style="padding: 5px 5px 0 5px; border: none; text-align: center;">
+                                    <div style="font-weight: bold; font-size: 1em; color: #000; margin-top: 5px;">
+                                        FOR, <span t-esc="o.company_id.partner_id.name"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1px 5px 5px 5px; text-align: center; border: none;margin-top: 240px; ">
+                                    <div style="font-size: 0.9em; color: #000; font-style: italic;">
+                                        Authorised Signature
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-6" style="padding-right: 15px; display: flex; justify-content: flex-end; margin-top: 420px;">
+                        <table class="table table-borderless" style="width: 80%; margin: 0 90px;">
+                            <tr style="border-top: 1px solid black;">
+                                <td style="padding: 5px 5px 0 5px; border: none; text-align: center;">
+                                    <div style="font-weight: bold; font-size: 0.9em; color: #000;">
+                                        FOR, <t t-esc="o.partner_id.name"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1px 5px 5px 5px; border: none; text-align: center;">
+                                    <div style="font-size: 0.9em; color: #000;">
+                                        Authorised Signature
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+<!--                <hr style="border: none; border-top: 1px solid #D3D3D3; margin-top: 15px;"/>-->
+            </div>
+        </t>
+    </template>
+    <template id="jk_report_purchaseorder">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="ad_jk_po_report.jk_report_purchaseorder_document" t-lang="o.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>

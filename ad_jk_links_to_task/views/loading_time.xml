@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_loading_time_tree" model="ir.ui.view">
+        <field name="name">loading.time.tree</field>
+        <field name="model">loading.time</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="lt_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_loading_time_form" model="ir.ui.view">
+        <field name="name">loading.time.form</field>
+        <field name="model">loading.time</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="lt_name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Action -->
+    <record id="action_loading_time" model="ir.actions.act_window">
+        <field name="name">Loading Time</field>
+        <field name="res_model">loading.time</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_loading_time_root"
+              name="Loading Time"
+              parent="project.menu_project_management"
+              action="action_loading_time"/>
+</odoo>

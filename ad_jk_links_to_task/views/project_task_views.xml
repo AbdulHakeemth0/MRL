@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_task_form_inherit_sale_purchase" model="ir.ui.view">
+        <field name="name">project.task.form.inherit.sale.purchase</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="action_view_purchase_orders" type="object" class="oe_stat_button">
+                    <span class="o_stat_value">
+                        <field name="purchase_order_count"/>
+                    </span>
+                    <span class="o_stat_text">-->
+                        <strong>PO</strong>
+                    </span>
+                </button>
+
+                <button name="action_view_sale_orders" type="object" class="oe_stat_button">
+                    <span class="o_stat_value">
+                        <field name="sale_order_count"/>
+                    </span>
+                    <span class="o_stat_text">
+                        <strong>SO</strong>-->
+                    </span>
+                </button>
+                <button name="action_view_packing_list" type="object" class="oe_stat_button">
+                    <span class="o_stat_value">
+                        <field name="packing_list_count"/>
+                    </span>
+                    <span class="o_stat_text">
+                        <strong>PL</strong>-->
+                    </span>
+                </button>
+
+                <button name="action_view_certificate_origin" type="object" class="oe_stat_button">
+                    <span class="o_stat_value">
+                        <field name="certificate_origin_count"/>
+                    </span>
+                    <span class="o_stat_text">
+                        <strong>COO</strong>-->
+                    </span>
+                </button>
+                <button name="action_view_freight_certificate" type="object" class="oe_stat_button">
+                    <span class="o_stat_value">
+                        <field name="freight_certificate_count"/>
+                    </span>
+                    <span class="o_stat_text">
+                        <strong>FC</strong>-->
+                    </span>
+                </button>
+
+                <button name="action_view_certificate_analysis" type="object" class="oe_stat_button">
+                    <span class="o_stat_value">
+                        <field name="certificate_analysis_count"/>
+                    </span>
+                    <span class="o_stat_text">
+                        <strong>COA</strong>-->
+                    </span>
+                </button>
+                <!--                <button name="action_view_form6" type="object" class="oe_stat_button">-->
+                <!--                    <span class="o_stat_value"><field name="form6_count"/></span>-->
+                <!--                    <span class="o_stat_text">-><strong>Form6</strong></span>-->
+                <!--                </button>-->
+                <!--                <button name="action_view_form9" type="object" class="oe_stat_button">-->
+                <!--                    <span class="o_stat_value"><field name="form9_count"/></span>-->
+                <!--                    <span class="o_stat_text">-><strong>Form9</strong></span>-->
+                <!--                </button>-->
+            </xpath>
+            <xpath expr="//page[@name='extra_info']" position="after">
+                <page name="form" string="Form Documents">
+                    <group>
+                        <field name="form6" filename="form6_filename"/>
+                        <field name="form9" filename="form9_filename"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

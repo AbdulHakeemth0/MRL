@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="movement_document_view_list" model="ir.ui.view">
+        <field name="name">movement.document.tree</field>
+        <field name="model">movement.document</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="note"/>
+            </tree>
+        </field>
+    </record>
+    <record id="movement_document_form" model="ir.ui.view">
+        <field name="name">movement.document.form</field>
+        <field name="model">movement.document</field>
+        <field name="arch" type="xml">
+            <form string="Form6">
+                <sheet>
+                    <group>
+                        <field name="note"/>
+                        <field name="abbreviations"/>
+                    </group>
+                    <notebook>
+                        <page name="document_ids" string="Documents">
+                            <field name="document_ids">
+                                <tree editable="bottom">
+                                    <field name="sl_no"/>
+                                    <field name="description"/>
+                                    <field name="details"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="open_view_movement_document" model="ir.actions.act_window">
+        <field name="name">Form6</field>
+        <field name="res_model">movement.document</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Looks like nothing is planned.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_movement_document"
+            name="Form6"
+            action="open_view_movement_document"
+            parent="project.menu_project_management"
+            sequence="1"/>
+
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_bank_form" model="ir.ui.view">
+        <field name="name">res.bank.form.view.inherit.ad.jk.links.to.task</field>
+        <field name="model">res.bank</field>
+        <field name="inherit_id" ref="base.view_res_bank_form"/>
+        <field name="arch" type="xml">
+            <field name="bic" position="after">
+                <field name="ifsc_code"/>
+<!--                <field name="iban_code"/>-->
+                <field name="branch"/>
+                <field name="po_box"/>
+                <field name="corre_bank"/>
+<!--                <field name="contact_person"/>-->
+<!--                <field name="contact_number" widget="phone"/>-->
+            </field>
+        </field>
+    </record>
+
+    <record id="view_res_partner_bank_form_inherit_contact" model="ir.ui.view">
+        <field name="name">res.partner.bank.form.inherit.contact</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Insert fields after Account Number -->
+            <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="contact_person"/>
+                    <field name="contact_number"/>
+                    <field name="address"/>
+                    <field name="corre_bank"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="swift"/>
+                <field name="account_type"/>
+                <field name="branch"/>
+                <field name="po_box"/>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

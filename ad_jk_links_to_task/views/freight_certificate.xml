@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="freight_certificate_view_list" model="ir.ui.view">
+        <field name="name">freight.certificate.tree</field>
+        <field name="model">freight.certificate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="number"/>
+                <field name="shipper"/>
+                <field name="consignee"/>
+                <field name="material_description"/>
+                <field name="bill_of_loading_no"/>
+            </tree>
+        </field>
+    </record>
+    <record id="freight_certificate_form" model="ir.ui.view">
+        <field name="name">freight.certificate.form</field>
+        <field name="model">freight.certificate</field>
+        <field name="arch" type="xml">
+            <form string="FREIGHT CERTIFICATE">
+                <header>
+                    <button name="%(certificate_freight_report_action)d" string="Print Certificate" type="action"
+                            class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="number" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="SHIPPER: -">
+                            <field name="shipper" widget="res_partner_many2one"
+                                   context="{'show_address': 1, 'show_vat': True}"/>
+<!--                            <field name="contact_no"/>-->
+<!--                            <field name="email"/>-->
+                        </group>
+                        <group string="CONSIGNEE / NOTIFY: - ">
+                            <field name="consignee"/>
+<!--                            <field name="consignee_gst"/>-->
+<!--                            <field name="consignee_pan"/>-->
+<!--                            <field name="consignee_iec_code"/>-->
+<!--                            <field name="consignee_contact"/>-->
+<!--                            <field name="consignee_no"/>-->
+<!--                            <field name="consignee_email"/>-->
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="material_description"/>
+                            <field name="bill_of_loading_no"/>
+                            <field name="vessel_name"/>
+                            <field name="ocean_freight"/>
+                            <field name="shipped_on_board"/>
+                            <field name="voyage_no"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="open_view_freight_certificate" model="ir.actions.act_window">
+        <field name="name">FREIGHT CERTIFICATE</field>
+        <field name="res_model">freight.certificate</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Looks like nothing is planned.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_freight_certificate"
+            name="FREIGHT CERTIFICATE"
+            action="open_view_freight_certificate"
+            parent="project.menu_project_management"
+            sequence="1"/>
+
+</odoo>
